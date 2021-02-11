@@ -1,0 +1,15 @@
+extends base
+
+block content
+  section.overview__main
+    .overview__main--sidebar
+      button.btn.btn__blue.sidebar__btn--1 contact list
+      button.btn.btn__blue.sidebar__btn--2 messages sent
+    .overview__main--content
+      h2.mb-medium candidates
+      .main__content
+        each user in users
+          .contact__container
+            p.contact__container--name=`${user.name}` 
+            button.btn.btn__blue.more__details(data-user-id=`${user._id}`) more details
+        
