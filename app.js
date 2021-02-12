@@ -3,6 +3,7 @@ const path = require('path');
 const userRouter = require('./routes/userRoutes');
 const messageRouter = require('./routes/messageRoutes');
 const viewRouter = require('./routes/viewRoutes');
+const globalErrorHandler = require('./controller/errorController');
 
 const app = express();
 app.set('view engine', 'pug');
@@ -17,5 +18,7 @@ app.use(express.json());
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/messages', messageRouter);
 app.use('/', viewRouter);
+
+app.use(globalErrorHandler);
 
 module.exports = app;

@@ -8,9 +8,9 @@ block content
       .info__block--content
         .contact__name
           p.contact__name--label client name :
-          p.contact__name--input sanjeev ray
+          p.contact__name--input=`${user.name} `
         .contact__number
           p.contact__number--label phone number :
-          p.contact__number--input 5896471236
+          p.contact__number--input=`${user.number}` 
         .contact__send
-          a.btn.contact__send--btn(href='#') send message
+          button.btn.contact__send--btn(data-user-id=`${user._id}`) send message

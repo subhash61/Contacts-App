@@ -1,44 +1,40 @@
 const User = require('../model/userModel');
+const catchAsync = require('../utils/catchAsync');
+const AppError = require('../utils/appError');
 
-exports.createUser = async (req, res, next) => {
-  try {
-    const user = await User.create(req.body);
+exports.createUser = catchAsync(async (req, res, next) => {
+  const user = await User.create(req.body);
 
-    res.status(201).json({
-      status: 'success',
-      data: {
-        user,
-      },
-    });
-  } catch (err) {
-    console.log(err);
+  res.status(201).json({
+    status: 'success',
+    data: {
+      user,
+    },
+  });
+});
+
+exports.getAllUsers = catchAsync(async (req, res, next) => {
+  const users = await User.find().select('name');
+  if (!users) {
+    return next(new AppError('no users found', 404));
   }
-};
+  res.status(200).json({
+    status: 'success',
+    data: {
+      users,
+    },
+  });
+});
 
-exports.getAllUsers = async (req, res, next) => {
-  try {
-    const users = await User.find().select('name');
-    res.status(200).json({
-      status: 'success',
-      data: {
-        users,
-      },
-    });
-  } catch (err) {
-    console.log(err);
+exports.getUser = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.params.userId);
+  if (!user) {
+    return next(new AppError('No user with that id', 404));
   }
-};
-
-exports.getUser = async (req, res, next) => {
-  try {
-    const user = await User.findById(req.params.userId);
-    res.status(200).json({
-      status: 'success',
-      data: {
-        user,
-      },
-    });
-  } catch (err) {
-    console.log(err);
-  }
-};
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user,
+    },
+  });
+});

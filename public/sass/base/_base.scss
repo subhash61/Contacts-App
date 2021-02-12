@@ -10,6 +10,12 @@
 html {
   font-size: 62.5%; // 1rem = 10px
 }
+            
+@media only screen and (max-width: 600px) {
+html {
+    font-size: 43.75% 
+}
+}
 
 body {
   box-sizing: border-box;

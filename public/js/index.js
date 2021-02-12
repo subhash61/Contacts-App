@@ -1,21 +1,62 @@
-/* eslint-disable node/no-unsupported-features/es-syntax */
-/* eslint-disable import/no-unresolved */
-// eslint-disable-next-line node/no-unsupported-features/es-syntax
-// eslint-disable-next-line import/no-unresolved
-// eslint-disable-next-line node/no-unsupported-features/es-syntax
-// eslint-disable-next-line node/no-missing-import
+/*eslint-disable */
 import '@babel/polyfill';
-// eslint-disable-next-line node/no-unsupported-features/es-syntax
 import { details } from './details';
+import { sendMessage } from './sendMessage';
+import { sendText } from './sendText';
 
-// eslint-disable-next-line no-undef
-// eslint-disable-next-line no-undef
-const moreDetailsBtn = document.querySelector('.more__details');
+const moreDetailsBtn = document.querySelectorAll('.more__details');
+const sendMessageBtn = document.querySelector('.contact__send--btn');
+const conactListBtn = document.querySelector('.sidebar__btn--1');
+const messageSentBtn = document.querySelector('.sidebar__btn--2');
+const contactListBloc = document.querySelector('.overview__content--messages');
+const messageSentBloc = document.querySelector('.overview__content--block');
+const sendTextBtn = document.querySelector('.send__text');
 
 if (moreDetailsBtn) {
-  moreDetailsBtn.addEventListener('click', (e) => {
+  moreDetailsBtn.forEach((el) => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      const { userId } = e.target.dataset;
+      details(userId);
+    });
+  });
+}
+
+if (sendMessageBtn) {
+  sendMessageBtn.addEventListener('click', (e) => {
     e.preventDefault();
     const { userId } = e.target.dataset;
-    details(userId);
+    sendMessage(userId);
+  });
+}
+if (conactListBtn) {
+  conactListBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    contactListBloc.classList.add('hidden');
+    messageSentBloc.classList.add('hidden');
+    contactListBloc.classList.remove('hidden');
+    conactListBtn.classList.remove('active');
+    messageSentBtn.classList.remove('active');
+    conactListBtn.classList.add('active');
+  });
+}
+if (messageSentBtn) {
+  messageSentBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    contactListBloc.classList.add('hidden');
+    messageSentBloc.classList.add('hidden');
+    messageSentBloc.classList.remove('hidden');
+    conactListBtn.classList.remove('active');
+    messageSentBtn.classList.remove('active');
+    messageSentBtn.classList.add('active');
+  });
+}
+if (sendTextBtn) {
+  sendTextBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const { userId } = e.target.dataset;
+    const { otp } = document.querySelector('.textarea').dataset;
+    sendText(userId, otp);
+    sendTextBtn.textContent = 'processing...';
   });
 }

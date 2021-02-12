@@ -1,7 +1,7 @@
 /*eslint-disable */
 import axios from 'axios';
 
-export const details = async (userId) => {
+export const sendMessage = async (userId) => {
   try {
     const res = await axios({
       method: 'GET',
@@ -10,10 +10,10 @@ export const details = async (userId) => {
         userId,
       },
     });
-
+    console.log(res);
     if (res.data.status === 'success') {
       // eslint-disable-next-line no-restricted-globals
-      location.assign(`/${res.data.data.user.slug}/contactInfo`);
+      location.assign(`/${res.data.data.user.slug}/contactInfo/sendMessage`);
     }
   } catch (err) {
     console.log('error:', err.response.data.message);

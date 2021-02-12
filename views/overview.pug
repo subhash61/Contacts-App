@@ -3,13 +3,59 @@ extends base
 block content
   section.overview__main
     .overview__main--sidebar
-      button.btn.btn__blue.sidebar__btn--1 contact list
+      button.btn.btn__blue.sidebar__btn--1.active
+        | contact list
       button.btn.btn__blue.sidebar__btn--2 messages sent
-    .overview__main--content
-      h2.mb-medium candidates
-      .main__content
-        each user in users
-          .contact__container
-            p.contact__container--name=`${user.name}` 
-            button.btn.btn__blue.more__details(data-user-id=`${user._id}`) more details
-        
+    .overview__content--messages
+      .overview__main--content
+        h2.mb-medium.overview__heading candidates
+        .main__content
+          each user in users
+            .contact__container
+              p.contact__container--name=`${user.name}`
+              button.btn.btn__blue.more__details(data-user-id=`${user._id}`) more details
+    .overview__content--block.hidden
+      .overview__main--content
+        h2.mb-medium.overview__heading messages sent
+        .message__content
+          if(messages.length === 0)
+            p.message__container--item.message__container--head
+              | no messages in the directory
+          else
+            .message__container
+              .message__container--block
+                p.message__container--item.message__container--head
+                  | name
+              .message__container--block
+                p.message__container--item.message__container--head
+                  | date
+              .message__container--block
+                p.message__container--item.message__container--head
+                  | otp
+            .message__container
+              each message in messages
+                .message__container--block
+                  p.message__container--item=`${message.user.name}`
+                .message__container--block
+                  -let date = String(new Date(message.smsTime))
+                  -date = date.split('GMT')[0]
+                  p.message__container--item=`${date}` 
+                .message__container--block
+                  p.message__container--item=`${message.otp}`
+            
+          
+
+
+
+  //- section.overview__main
+  //-   .overview__main--sidebar
+  //-     button.btn.btn__blue.sidebar__btn--1 contact list
+  //-     button.btn.btn__blue.sidebar__btn--2 messages sent
+  //-   .overview__main--content
+  //-     h2.mb-medium candidates
+  //-     .main__content
+  //-       each user in users
+  //-         .contact__container
+  //-           p.contact__container--name=`${user.name}` 
+  //-           button.btn.btn__blue.more__details(data-user-id=`${user._id}`) more details
+
