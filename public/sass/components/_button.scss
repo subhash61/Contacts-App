@@ -21,6 +21,12 @@
   &__blue {
   }
 }
+          
+@media only screen and (max-width: 400px) {
+.btn {
+    padding: .6rem 1.5rem; 
+}
+}
 
 .btn:hover {
   transform: translateY(-3px);

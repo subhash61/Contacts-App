@@ -5,7 +5,11 @@
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr;
 }
-
+@media only screen and (max-width: 600px){
+.section__nav {
+    padding: 0.7rem 7rem,
+}
+}
 .nav__div {
   &--1 {
     display: flex;

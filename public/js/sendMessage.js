@@ -10,7 +10,6 @@ export const sendMessage = async (userId) => {
         userId,
       },
     });
-    console.log(res);
     if (res.data.status === 'success') {
       // eslint-disable-next-line no-restricted-globals
       location.assign(`/${res.data.data.user.slug}/contactInfo/sendMessage`);
