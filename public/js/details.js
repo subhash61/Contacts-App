@@ -1,5 +1,6 @@
 /*eslint-disable */
 import axios from 'axios';
+import { showAlert } from './alert';
 
 export const details = async (userId) => {
   try {
@@ -16,6 +17,6 @@ export const details = async (userId) => {
       location.assign(`/${res.data.data.user.slug}/contactInfo`);
     }
   } catch (err) {
-    console.log('error:', err.response.data.message);
+    showAlert('error', err.response.data.message);
   }
 };
